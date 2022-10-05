@@ -1,0 +1,7 @@
+# ide
+.idea/*
+!.idea/runConfigurations
+!.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/copyright
+*.iml
