@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package photo.v1;
+
+// The photo service definition
+service PhotoService {
+  // get all photos
+  rpc GetPhotos(GetPhotosRequest) returns (GetPhotosResponse) {}
+  rpc GetByHash(GetByHashRequest) returns (GetByHashResponse) {}
+  rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
+}
+
+message GetPhotosRequest {}
+
+message GetByHashRequest {
+  string hash = 1;
+}
+
+message ContentByHashRequest {
+  string hash = 1;
+}
+
+message GetPhotosResponse {
+  repeated Photo photos = 1;
+}
+
+message GetByHashResponse {
+  Photo photos = 1;
+}
+
+message Photo {
+  // Main
+
+  string hash = 1;
+  string path = 2;
+
+  // Exif
+
+  string date_time = 3;
+  int32 iso = 4;
+  string exposure_time = 5;
+  int32 x_dimension = 6;
+  int32 y_dimension = 7;
+  string model = 8;
+  string f_number = 9;
+}
+
+message PhotoServiceContentByHashResponse {
+  bytes data = 1;
+}
