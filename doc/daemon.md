@@ -4,6 +4,8 @@
 ## Table of Contents
 
 - [contracts/daemon/v1/daemon.proto](#contracts_daemon_v1_daemon-proto)
+    - [HeartBeatRequest](#daemon-v1-HeartBeatRequest)
+    - [HeartBeatResponse](#daemon-v1-HeartBeatResponse)
     - [RegisterRequest](#daemon-v1-RegisterRequest)
     - [RegisterResponse](#daemon-v1-RegisterResponse)
   
@@ -20,6 +22,31 @@
 
 
 
+<a name="daemon-v1-HeartBeatRequest"></a>
+
+### HeartBeatRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| uuid | [string](#string) |  | The id used to identify the daemon |
+
+
+
+
+
+
+<a name="daemon-v1-HeartBeatResponse"></a>
+
+### HeartBeatResponse
+
+
+
+
+
+
+
 <a name="daemon-v1-RegisterRequest"></a>
 
 ### RegisterRequest
@@ -31,6 +58,7 @@
 | daemon_version | [string](#string) |  | The version of the daemon |
 | daemon_host | [string](#string) |  | The host (IP, hostname) to use to contact the daemon |
 | daemon_port | [int32](#int32) |  | The port to use to contact the daemon |
+| daemon_name | [string](#string) |  | The name of the daemon |
 
 
 
@@ -66,7 +94,8 @@ The daemon service definition
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Register | [RegisterRequest](#daemon-v1-RegisterRequest) | [RegisterResponse](#daemon-v1-RegisterResponse) | Registers a new daemon |
+| Register | [RegisterRequest](#daemon-v1-RegisterRequest) | [RegisterResponse](#daemon-v1-RegisterResponse) | Register registers a new daemon |
+| HeartBeat | [HeartBeatRequest](#daemon-v1-HeartBeatRequest) | [HeartBeatResponse](#daemon-v1-HeartBeatResponse) | HeartBeat notifies the web app that a daemon is alive |
 
  
 

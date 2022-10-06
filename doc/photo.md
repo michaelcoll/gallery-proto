@@ -146,9 +146,9 @@ The photo service definition
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetPhotos | [GetPhotosRequest](#photo-v1-GetPhotosRequest) | [GetPhotosResponse](#photo-v1-GetPhotosResponse) | gets all photos |
-| GetByHash | [GetByHashRequest](#photo-v1-GetByHashRequest) | [GetByHashResponse](#photo-v1-GetByHashResponse) | gets a photo by its hash |
-| ContentByHash | [ContentByHashRequest](#photo-v1-ContentByHashRequest) | [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse) stream | gets the photo content by its hash |
+| GetPhotos | [GetPhotosRequest](#photo-v1-GetPhotosRequest) | [GetPhotosResponse](#photo-v1-GetPhotosResponse) | GetPhotos returns all the photos |
+| GetByHash | [GetByHashRequest](#photo-v1-GetByHashRequest) | [GetByHashResponse](#photo-v1-GetByHashResponse) | GetByHash returns a photo by its hash |
+| ContentByHash | [ContentByHashRequest](#photo-v1-ContentByHashRequest) | [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse) stream | ContentByHash returns the photo content by its hash |
 
  
 
