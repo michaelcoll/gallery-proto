@@ -25,7 +25,7 @@ message GetPhotosResponse {
 }
 
 message GetByHashResponse {
-  Photo photos = 1;
+  Photo photo = 1;
 }
 
 message Photo {
