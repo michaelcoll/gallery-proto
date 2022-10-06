@@ -4,11 +4,11 @@ package photo.v1;
 
 // The photo service definition
 service PhotoService {
-  // gets all photos
+  // GetPhotos returns all the photos
   rpc GetPhotos(GetPhotosRequest) returns (GetPhotosResponse) {}
-  // gets a photo by its hash
+  // GetByHash returns a photo by its hash
   rpc GetByHash(GetByHashRequest) returns (GetByHashResponse) {}
-  // gets the photo content by its hash
+  // ContentByHash returns the photo content by its hash
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
 }
 

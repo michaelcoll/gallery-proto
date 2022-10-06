@@ -22,8 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DaemonServiceClient interface {
-	// get all photos
+	// Register registers a new daemon
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	// HeartBeat notifies the web app that a daemon is alive
+	HeartBeat(ctx context.Context, in *HeartBeatRequest, opts ...grpc.CallOption) (*HeartBeatResponse, error)
 }
 
 type daemonServiceClient struct {
@@ -43,12 +45,23 @@ func (c *daemonServiceClient) Register(ctx context.Context, in *RegisterRequest,
 	return out, nil
 }
 
+func (c *daemonServiceClient) HeartBeat(ctx context.Context, in *HeartBeatRequest, opts ...grpc.CallOption) (*HeartBeatResponse, error) {
+	out := new(HeartBeatResponse)
+	err := c.cc.Invoke(ctx, "/daemon.v1.DaemonService/HeartBeat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DaemonServiceServer is the server API for DaemonService service.
 // All implementations should embed UnimplementedDaemonServiceServer
 // for forward compatibility
 type DaemonServiceServer interface {
-	// get all photos
+	// Register registers a new daemon
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	// HeartBeat notifies the web app that a daemon is alive
+	HeartBeat(context.Context, *HeartBeatRequest) (*HeartBeatResponse, error)
 }
 
 // UnimplementedDaemonServiceServer should be embedded to have forward compatible implementations.
@@ -57,6 +70,9 @@ type UnimplementedDaemonServiceServer struct {
 
 func (UnimplementedDaemonServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedDaemonServiceServer) HeartBeat(context.Context, *HeartBeatRequest) (*HeartBeatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HeartBeat not implemented")
 }
 
 // UnsafeDaemonServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -88,6 +104,24 @@ func _DaemonService_Register_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DaemonService_HeartBeat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HeartBeatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DaemonServiceServer).HeartBeat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/daemon.v1.DaemonService/HeartBeat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DaemonServiceServer).HeartBeat(ctx, req.(*HeartBeatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DaemonService_ServiceDesc is the grpc.ServiceDesc for DaemonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +132,10 @@ var DaemonService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _DaemonService_Register_Handler,
+		},
+		{
+			MethodName: "HeartBeat",
+			Handler:    _DaemonService_HeartBeat_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

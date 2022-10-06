@@ -22,9 +22,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PhotoServiceClient interface {
-	// get all photos
+	// GetPhotos returns all the photos
 	GetPhotos(ctx context.Context, in *GetPhotosRequest, opts ...grpc.CallOption) (*GetPhotosResponse, error)
+	// GetByHash returns a photo by its hash
 	GetByHash(ctx context.Context, in *GetByHashRequest, opts ...grpc.CallOption) (*GetByHashResponse, error)
+	// ContentByHash returns the photo content by its hash
 	ContentByHash(ctx context.Context, in *ContentByHashRequest, opts ...grpc.CallOption) (PhotoService_ContentByHashClient, error)
 }
 
@@ -90,9 +92,11 @@ func (x *photoServiceContentByHashClient) Recv() (*PhotoServiceContentByHashResp
 // All implementations should embed UnimplementedPhotoServiceServer
 // for forward compatibility
 type PhotoServiceServer interface {
-	// get all photos
+	// GetPhotos returns all the photos
 	GetPhotos(context.Context, *GetPhotosRequest) (*GetPhotosResponse, error)
+	// GetByHash returns a photo by its hash
 	GetByHash(context.Context, *GetByHashRequest) (*GetByHashResponse, error)
+	// ContentByHash returns the photo content by its hash
 	ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error
 }
 

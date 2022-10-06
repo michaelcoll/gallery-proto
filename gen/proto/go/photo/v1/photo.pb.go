@@ -63,7 +63,7 @@ type GetByHashRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
+	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"` // a photo hash
 }
 
 func (x *GetByHashRequest) Reset() {
@@ -110,7 +110,7 @@ type ContentByHashRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
+	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"` // a photo hash
 }
 
 func (x *ContentByHashRequest) Reset() {
@@ -157,7 +157,7 @@ type GetPhotosResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Photos []*Photo `protobuf:"bytes,1,rep,name=photos,proto3" json:"photos,omitempty"`
+	Photos []*Photo `protobuf:"bytes,1,rep,name=photos,proto3" json:"photos,omitempty"` // the photos
 }
 
 func (x *GetPhotosResponse) Reset() {
@@ -251,15 +251,15 @@ type Photo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hash         string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-	Path         string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	DateTime     string `protobuf:"bytes,3,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"`
-	Iso          int32  `protobuf:"varint,4,opt,name=iso,proto3" json:"iso,omitempty"`
-	ExposureTime string `protobuf:"bytes,5,opt,name=exposure_time,json=exposureTime,proto3" json:"exposure_time,omitempty"`
-	XDimension   int32  `protobuf:"varint,6,opt,name=x_dimension,json=xDimension,proto3" json:"x_dimension,omitempty"`
-	YDimension   int32  `protobuf:"varint,7,opt,name=y_dimension,json=yDimension,proto3" json:"y_dimension,omitempty"`
-	Model        string `protobuf:"bytes,8,opt,name=model,proto3" json:"model,omitempty"`
-	FNumber      string `protobuf:"bytes,9,opt,name=f_number,json=fNumber,proto3" json:"f_number,omitempty"`
+	Hash         string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`                                     // the photo hash
+	Path         string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`                                     // the photo path on the daemon fs
+	DateTime     string `protobuf:"bytes,3,opt,name=date_time,json=dateTime,proto3" json:"date_time,omitempty"`             // the date
+	Iso          int32  `protobuf:"varint,4,opt,name=iso,proto3" json:"iso,omitempty"`                                      // the ISO of the image
+	ExposureTime string `protobuf:"bytes,5,opt,name=exposure_time,json=exposureTime,proto3" json:"exposure_time,omitempty"` // the exposure as a fraction
+	XDimension   int32  `protobuf:"varint,6,opt,name=x_dimension,json=xDimension,proto3" json:"x_dimension,omitempty"`      // the x dimension of the image
+	YDimension   int32  `protobuf:"varint,7,opt,name=y_dimension,json=yDimension,proto3" json:"y_dimension,omitempty"`      // the y dimension of the image
+	Model        string `protobuf:"bytes,8,opt,name=model,proto3" json:"model,omitempty"`                                   // the model of the camera that took the image
+	FNumber      string `protobuf:"bytes,9,opt,name=f_number,json=fNumber,proto3" json:"f_number,omitempty"`                // the f Number
 }
 
 func (x *Photo) Reset() {
