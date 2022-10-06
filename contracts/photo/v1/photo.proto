@@ -4,24 +4,26 @@ package photo.v1;
 
 // The photo service definition
 service PhotoService {
-  // get all photos
+  // gets all photos
   rpc GetPhotos(GetPhotosRequest) returns (GetPhotosResponse) {}
+  // gets a photo by its hash
   rpc GetByHash(GetByHashRequest) returns (GetByHashResponse) {}
+  // gets the photo content by its hash
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
 }
 
 message GetPhotosRequest {}
 
 message GetByHashRequest {
-  string hash = 1;
+  string hash = 1; // a photo hash
 }
 
 message ContentByHashRequest {
-  string hash = 1;
+  string hash = 1; // a photo hash
 }
 
 message GetPhotosResponse {
-  repeated Photo photos = 1;
+  repeated Photo photos = 1; // the photos
 }
 
 message GetByHashResponse {
@@ -31,18 +33,18 @@ message GetByHashResponse {
 message Photo {
   // Main
 
-  string hash = 1;
-  string path = 2;
+  string hash = 1; // the photo hash
+  string path = 2; // the photo path on the daemon fs
 
   // Exif
 
-  string date_time = 3;
-  int32 iso = 4;
-  string exposure_time = 5;
-  int32 x_dimension = 6;
-  int32 y_dimension = 7;
-  string model = 8;
-  string f_number = 9;
+  string date_time = 3; // the date
+  int32 iso = 4; // the ISO of the image
+  string exposure_time = 5; // the exposure as a fraction
+  int32 x_dimension = 6; // the x dimension of the image
+  int32 y_dimension = 7; // the y dimension of the image
+  string model = 8; // the model of the camera that took the image
+  string f_number = 9; // the f Number
 }
 
 message PhotoServiceContentByHashResponse {
