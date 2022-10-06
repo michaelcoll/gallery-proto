@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package daemon.v1;
+
+// The daemon service definition
+service DaemonService {
+  // Registers a new daemon
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+}
+
+message RegisterRequest {
+  string daemon_version = 1; // The version of the daemon
+  string daemon_host = 2; // The host (IP, hostname) to use to contact the daemon
+  int32 daemon_port = 3; // The port to use to contact the daemon
+}
+
+message RegisterResponse {
+  string uuid = 1; // The id used to identify the daemon
+  int32 exp_in = 2; // The duration in seconds that the daemon id is valid
+}
