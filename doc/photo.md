@@ -5,6 +5,8 @@
 
 - [contracts/photo/v1/photo.proto](#contracts_photo_v1_photo-proto)
     - [ContentByHashRequest](#photo-v1-ContentByHashRequest)
+    - [ExistsByHashRequest](#photo-v1-ExistsByHashRequest)
+    - [ExistsByHashResponse](#photo-v1-ExistsByHashResponse)
     - [GetByHashRequest](#photo-v1-GetByHashRequest)
     - [GetByHashResponse](#photo-v1-GetByHashResponse)
     - [GetPhotosRequest](#photo-v1-GetPhotosRequest)
@@ -34,6 +36,36 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hash | [string](#string) |  | a photo hash |
+
+
+
+
+
+
+<a name="photo-v1-ExistsByHashRequest"></a>
+
+### ExistsByHashRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hash | [string](#string) |  | a photo hash |
+
+
+
+
+
+
+<a name="photo-v1-ExistsByHashResponse"></a>
+
+### ExistsByHashResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| exists | [bool](#bool) |  |  |
 
 
 
@@ -148,6 +180,7 @@ The photo service definition
 | ----------- | ------------ | ------------- | ------------|
 | GetPhotos | [GetPhotosRequest](#photo-v1-GetPhotosRequest) | [GetPhotosResponse](#photo-v1-GetPhotosResponse) | GetPhotos returns all the photos |
 | GetByHash | [GetByHashRequest](#photo-v1-GetByHashRequest) | [GetByHashResponse](#photo-v1-GetByHashResponse) | GetByHash returns a photo by its hash |
+| ExistsByHash | [ExistsByHashRequest](#photo-v1-ExistsByHashRequest) | [ExistsByHashResponse](#photo-v1-ExistsByHashResponse) | ExistsByHash returns true if a photo with the given hash exists |
 | ContentByHash | [ContentByHashRequest](#photo-v1-ContentByHashRequest) | [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse) stream | ContentByHash returns the photo content by its hash |
 
  
