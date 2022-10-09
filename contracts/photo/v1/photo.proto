@@ -8,26 +8,40 @@ service PhotoService {
   rpc GetPhotos(GetPhotosRequest) returns (GetPhotosResponse) {}
   // GetByHash returns a photo by its hash
   rpc GetByHash(GetByHashRequest) returns (GetByHashResponse) {}
+  // ExistsByHash returns true if a photo with the given hash exists
+  rpc ExistsByHash(ExistsByHashRequest) returns (ExistsByHashResponse) {}
   // ContentByHash returns the photo content by its hash
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
 }
 
 message GetPhotosRequest {}
 
+message GetPhotosResponse {
+  repeated Photo photos = 1; // the photos
+}
+
 message GetByHashRequest {
   string hash = 1; // a photo hash
+}
+
+message GetByHashResponse {
+  Photo photo = 1;
+}
+
+message ExistsByHashRequest {
+  string hash = 1; // a photo hash
+}
+
+message ExistsByHashResponse {
+  bool exists = 1;
 }
 
 message ContentByHashRequest {
   string hash = 1; // a photo hash
 }
 
-message GetPhotosResponse {
-  repeated Photo photos = 1; // the photos
-}
-
-message GetByHashResponse {
-  Photo photo = 1;
+message PhotoServiceContentByHashResponse {
+  bytes data = 1;
 }
 
 message Photo {
@@ -45,8 +59,4 @@ message Photo {
   int32 y_dimension = 7; // the y dimension of the image
   string model = 8; // the model of the camera that took the image
   string f_number = 9; // the f Number
-}
-
-message PhotoServiceContentByHashResponse {
-  bytes data = 1;
 }

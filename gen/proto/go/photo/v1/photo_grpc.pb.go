@@ -26,6 +26,8 @@ type PhotoServiceClient interface {
 	GetPhotos(ctx context.Context, in *GetPhotosRequest, opts ...grpc.CallOption) (*GetPhotosResponse, error)
 	// GetByHash returns a photo by its hash
 	GetByHash(ctx context.Context, in *GetByHashRequest, opts ...grpc.CallOption) (*GetByHashResponse, error)
+	// ExistsByHash returns true if a photo with the given hash exists
+	ExistsByHash(ctx context.Context, in *ExistsByHashRequest, opts ...grpc.CallOption) (*ExistsByHashResponse, error)
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(ctx context.Context, in *ContentByHashRequest, opts ...grpc.CallOption) (PhotoService_ContentByHashClient, error)
 }
@@ -50,6 +52,15 @@ func (c *photoServiceClient) GetPhotos(ctx context.Context, in *GetPhotosRequest
 func (c *photoServiceClient) GetByHash(ctx context.Context, in *GetByHashRequest, opts ...grpc.CallOption) (*GetByHashResponse, error) {
 	out := new(GetByHashResponse)
 	err := c.cc.Invoke(ctx, "/photo.v1.PhotoService/GetByHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *photoServiceClient) ExistsByHash(ctx context.Context, in *ExistsByHashRequest, opts ...grpc.CallOption) (*ExistsByHashResponse, error) {
+	out := new(ExistsByHashResponse)
+	err := c.cc.Invoke(ctx, "/photo.v1.PhotoService/ExistsByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,6 +107,8 @@ type PhotoServiceServer interface {
 	GetPhotos(context.Context, *GetPhotosRequest) (*GetPhotosResponse, error)
 	// GetByHash returns a photo by its hash
 	GetByHash(context.Context, *GetByHashRequest) (*GetByHashResponse, error)
+	// ExistsByHash returns true if a photo with the given hash exists
+	ExistsByHash(context.Context, *ExistsByHashRequest) (*ExistsByHashResponse, error)
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error
 }
@@ -109,6 +122,9 @@ func (UnimplementedPhotoServiceServer) GetPhotos(context.Context, *GetPhotosRequ
 }
 func (UnimplementedPhotoServiceServer) GetByHash(context.Context, *GetByHashRequest) (*GetByHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByHash not implemented")
+}
+func (UnimplementedPhotoServiceServer) ExistsByHash(context.Context, *ExistsByHashRequest) (*ExistsByHashResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExistsByHash not implemented")
 }
 func (UnimplementedPhotoServiceServer) ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error {
 	return status.Errorf(codes.Unimplemented, "method ContentByHash not implemented")
@@ -161,6 +177,24 @@ func _PhotoService_GetByHash_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PhotoService_ExistsByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExistsByHashRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PhotoServiceServer).ExistsByHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/photo.v1.PhotoService/ExistsByHash",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PhotoServiceServer).ExistsByHash(ctx, req.(*ExistsByHashRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PhotoService_ContentByHash_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ContentByHashRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -196,6 +230,10 @@ var PhotoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetByHash",
 			Handler:    _PhotoService_GetByHash_Handler,
+		},
+		{
+			MethodName: "ExistsByHash",
+			Handler:    _PhotoService_ExistsByHash_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
