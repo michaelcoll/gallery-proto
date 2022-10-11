@@ -159,6 +159,7 @@ Main
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | data | [bytes](#bytes) |  |  |
+| content_type | [string](#string) |  |  |
 
 
 
