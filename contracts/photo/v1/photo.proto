@@ -42,6 +42,7 @@ message ContentByHashRequest {
 
 message PhotoServiceContentByHashResponse {
   bytes data = 1;
+  string content_type = 2;
 }
 
 message Photo {
