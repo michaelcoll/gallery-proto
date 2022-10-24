@@ -14,7 +14,10 @@ service PhotoService {
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
 }
 
-message GetPhotosRequest {}
+message GetPhotosRequest {
+  int32 page = 1; // the page number
+  int32 page_size = 2; // the page size
+}
 
 message GetPhotosResponse {
   repeated Photo photos = 1; // the photos
