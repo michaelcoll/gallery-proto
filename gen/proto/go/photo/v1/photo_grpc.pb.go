@@ -30,6 +30,8 @@ type PhotoServiceClient interface {
 	ExistsByHash(ctx context.Context, in *ExistsByHashRequest, opts ...grpc.CallOption) (*ExistsByHashResponse, error)
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(ctx context.Context, in *ContentByHashRequest, opts ...grpc.CallOption) (PhotoService_ContentByHashClient, error)
+	// ThumbnailByHash returns the photo thumbnail by its hash
+	ThumbnailByHash(ctx context.Context, in *ThumbnailByHashRequest, opts ...grpc.CallOption) (PhotoService_ThumbnailByHashClient, error)
 }
 
 type photoServiceClient struct {
@@ -99,6 +101,38 @@ func (x *photoServiceContentByHashClient) Recv() (*PhotoServiceContentByHashResp
 	return m, nil
 }
 
+func (c *photoServiceClient) ThumbnailByHash(ctx context.Context, in *ThumbnailByHashRequest, opts ...grpc.CallOption) (PhotoService_ThumbnailByHashClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PhotoService_ServiceDesc.Streams[1], "/photo.v1.PhotoService/ThumbnailByHash", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &photoServiceThumbnailByHashClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PhotoService_ThumbnailByHashClient interface {
+	Recv() (*PhotoServiceThumbnailByHashResponse, error)
+	grpc.ClientStream
+}
+
+type photoServiceThumbnailByHashClient struct {
+	grpc.ClientStream
+}
+
+func (x *photoServiceThumbnailByHashClient) Recv() (*PhotoServiceThumbnailByHashResponse, error) {
+	m := new(PhotoServiceThumbnailByHashResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PhotoServiceServer is the server API for PhotoService service.
 // All implementations should embed UnimplementedPhotoServiceServer
 // for forward compatibility
@@ -111,6 +145,8 @@ type PhotoServiceServer interface {
 	ExistsByHash(context.Context, *ExistsByHashRequest) (*ExistsByHashResponse, error)
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error
+	// ThumbnailByHash returns the photo thumbnail by its hash
+	ThumbnailByHash(*ThumbnailByHashRequest, PhotoService_ThumbnailByHashServer) error
 }
 
 // UnimplementedPhotoServiceServer should be embedded to have forward compatible implementations.
@@ -128,6 +164,9 @@ func (UnimplementedPhotoServiceServer) ExistsByHash(context.Context, *ExistsByHa
 }
 func (UnimplementedPhotoServiceServer) ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error {
 	return status.Errorf(codes.Unimplemented, "method ContentByHash not implemented")
+}
+func (UnimplementedPhotoServiceServer) ThumbnailByHash(*ThumbnailByHashRequest, PhotoService_ThumbnailByHashServer) error {
+	return status.Errorf(codes.Unimplemented, "method ThumbnailByHash not implemented")
 }
 
 // UnsafePhotoServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -216,6 +255,27 @@ func (x *photoServiceContentByHashServer) Send(m *PhotoServiceContentByHashRespo
 	return x.ServerStream.SendMsg(m)
 }
 
+func _PhotoService_ThumbnailByHash_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ThumbnailByHashRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PhotoServiceServer).ThumbnailByHash(m, &photoServiceThumbnailByHashServer{stream})
+}
+
+type PhotoService_ThumbnailByHashServer interface {
+	Send(*PhotoServiceThumbnailByHashResponse) error
+	grpc.ServerStream
+}
+
+type photoServiceThumbnailByHashServer struct {
+	grpc.ServerStream
+}
+
+func (x *photoServiceThumbnailByHashServer) Send(m *PhotoServiceThumbnailByHashResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // PhotoService_ServiceDesc is the grpc.ServiceDesc for PhotoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -240,6 +300,11 @@ var PhotoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ContentByHash",
 			Handler:       _PhotoService_ContentByHash_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ThumbnailByHash",
+			Handler:       _PhotoService_ThumbnailByHash_Handler,
 			ServerStreams: true,
 		},
 	},
