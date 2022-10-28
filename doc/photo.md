@@ -13,6 +13,8 @@
     - [GetPhotosResponse](#photo-v1-GetPhotosResponse)
     - [Photo](#photo-v1-Photo)
     - [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse)
+    - [PhotoServiceThumbnailByHashResponse](#photo-v1-PhotoServiceThumbnailByHashResponse)
+    - [ThumbnailByHashRequest](#photo-v1-ThumbnailByHashRequest)
   
     - [PhotoService](#photo-v1-PhotoService)
   
@@ -171,6 +173,37 @@ Main
 
 
 
+
+<a name="photo-v1-PhotoServiceThumbnailByHashResponse"></a>
+
+### PhotoServiceThumbnailByHashResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data | [bytes](#bytes) |  |  |
+| content_type | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="photo-v1-ThumbnailByHashRequest"></a>
+
+### ThumbnailByHashRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hash | [string](#string) |  | a photo hash |
+
+
+
+
+
  
 
  
@@ -189,6 +222,7 @@ The photo service definition
 | GetByHash | [GetByHashRequest](#photo-v1-GetByHashRequest) | [GetByHashResponse](#photo-v1-GetByHashResponse) | GetByHash returns a photo by its hash |
 | ExistsByHash | [ExistsByHashRequest](#photo-v1-ExistsByHashRequest) | [ExistsByHashResponse](#photo-v1-ExistsByHashResponse) | ExistsByHash returns true if a photo with the given hash exists |
 | ContentByHash | [ContentByHashRequest](#photo-v1-ContentByHashRequest) | [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse) stream | ContentByHash returns the photo content by its hash |
+| ThumbnailByHash | [ThumbnailByHashRequest](#photo-v1-ThumbnailByHashRequest) | [PhotoServiceThumbnailByHashResponse](#photo-v1-PhotoServiceThumbnailByHashResponse) stream | ThumbnailByHash returns the photo thumbnail by its hash |
 
  
 

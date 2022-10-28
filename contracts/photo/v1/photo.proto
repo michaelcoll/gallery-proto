@@ -12,6 +12,8 @@ service PhotoService {
   rpc ExistsByHash(ExistsByHashRequest) returns (ExistsByHashResponse) {}
   // ContentByHash returns the photo content by its hash
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
+  // ThumbnailByHash returns the photo thumbnail by its hash
+  rpc ThumbnailByHash(ThumbnailByHashRequest) returns (stream PhotoServiceThumbnailByHashResponse) {}
 }
 
 message GetPhotosRequest {
@@ -44,6 +46,15 @@ message ContentByHashRequest {
 }
 
 message PhotoServiceContentByHashResponse {
+  bytes data = 1;
+  string content_type = 2;
+}
+
+message ThumbnailByHashRequest {
+  string hash = 1; // a photo hash
+}
+
+message PhotoServiceThumbnailByHashResponse {
   bytes data = 1;
   string content_type = 2;
 }
