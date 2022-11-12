@@ -26,13 +26,13 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## contracts/photo/v1/photo.proto
-
+Photo related messages and service
 
 
 <a name="photo-v1-ContentByHashRequest"></a>
 
 ### ContentByHashRequest
-
+ContentByHashRequest represent a search query with a photo hash
 
 
 | Field | Type | Label | Description |
@@ -47,7 +47,7 @@
 <a name="photo-v1-ExistsByHashRequest"></a>
 
 ### ExistsByHashRequest
-
+ExistsByHashRequest represent an existence search query with a photo hash
 
 
 | Field | Type | Label | Description |
@@ -77,7 +77,7 @@
 <a name="photo-v1-GetByHashRequest"></a>
 
 ### GetByHashRequest
-
+GetByHashRequest represent a search query with a photo hash
 
 
 | Field | Type | Label | Description |
@@ -107,7 +107,8 @@
 <a name="photo-v1-GetPhotosRequest"></a>
 
 ### GetPhotosRequest
-
+GetPhotosRequest represent a search query with pagination options to
+indicate which results to include in the response.
 
 
 | Field | Type | Label | Description |
@@ -138,6 +139,8 @@
 <a name="photo-v1-Photo"></a>
 
 ### Photo
+Photo contains basic info of a photo and its metadata
+
 Main
 
 
@@ -193,12 +196,14 @@ Main
 <a name="photo-v1-ThumbnailByHashRequest"></a>
 
 ### ThumbnailByHashRequest
-
+ThumbnailByHashRequest represent a search query with a photo hash, a width or an height.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hash | [string](#string) |  | a photo hash |
+| width | [int32](#int32) |  | the requested width for the thumbnail |
+| height | [int32](#int32) |  | the requested height for the thumbnail |
 
 
 
@@ -222,7 +227,7 @@ The photo service definition
 | GetByHash | [GetByHashRequest](#photo-v1-GetByHashRequest) | [GetByHashResponse](#photo-v1-GetByHashResponse) | GetByHash returns a photo by its hash |
 | ExistsByHash | [ExistsByHashRequest](#photo-v1-ExistsByHashRequest) | [ExistsByHashResponse](#photo-v1-ExistsByHashResponse) | ExistsByHash returns true if a photo with the given hash exists |
 | ContentByHash | [ContentByHashRequest](#photo-v1-ContentByHashRequest) | [PhotoServiceContentByHashResponse](#photo-v1-PhotoServiceContentByHashResponse) stream | ContentByHash returns the photo content by its hash |
-| ThumbnailByHash | [ThumbnailByHashRequest](#photo-v1-ThumbnailByHashRequest) | [PhotoServiceThumbnailByHashResponse](#photo-v1-PhotoServiceThumbnailByHashResponse) stream | ThumbnailByHash returns the photo thumbnail by its hash |
+| ThumbnailByHash | [ThumbnailByHashRequest](#photo-v1-ThumbnailByHashRequest) | [PhotoServiceThumbnailByHashResponse](#photo-v1-PhotoServiceThumbnailByHashResponse) stream | ThumbnailByHash returns the photo thumbnail by its hash A width or a height can be provided, if so the thumbnail will have one of the property. If neither the width nor the height is specified, a width of 200 will be used. If a width and a height is specified, only the width will be used. |
 
  
 

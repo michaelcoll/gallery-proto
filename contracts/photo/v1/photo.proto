@@ -1,3 +1,4 @@
+// Photo related messages and service
 syntax = "proto3";
 
 package photo.v1;
@@ -13,9 +14,14 @@ service PhotoService {
   // ContentByHash returns the photo content by its hash
   rpc ContentByHash(ContentByHashRequest) returns (stream PhotoServiceContentByHashResponse) {}
   // ThumbnailByHash returns the photo thumbnail by its hash
+  // A width or a height can be provided, if so the thumbnail will have one of the property.
+  // If neither the width nor the height is specified, a width of 200 will be used.
+  // If a width and a height is specified, only the width will be used.
   rpc ThumbnailByHash(ThumbnailByHashRequest) returns (stream PhotoServiceThumbnailByHashResponse) {}
 }
 
+// GetPhotosRequest represent a search query with pagination options to
+// indicate which results to include in the response.
 message GetPhotosRequest {
   int32 page = 1; // the page number
   int32 page_size = 2; // the page size
@@ -25,6 +31,7 @@ message GetPhotosResponse {
   repeated Photo photos = 1; // the photos
 }
 
+// GetByHashRequest represent a search query with a photo hash
 message GetByHashRequest {
   string hash = 1; // a photo hash
 }
@@ -33,6 +40,7 @@ message GetByHashResponse {
   Photo photo = 1;
 }
 
+// ExistsByHashRequest represent an existence search query with a photo hash
 message ExistsByHashRequest {
   string hash = 1; // a photo hash
 }
@@ -41,6 +49,7 @@ message ExistsByHashResponse {
   bool exists = 1;
 }
 
+// ContentByHashRequest represent a search query with a photo hash
 message ContentByHashRequest {
   string hash = 1; // a photo hash
 }
@@ -50,8 +59,11 @@ message PhotoServiceContentByHashResponse {
   string content_type = 2;
 }
 
+// ThumbnailByHashRequest represent a search query with a photo hash, a width or an height.
 message ThumbnailByHashRequest {
   string hash = 1; // a photo hash
+  int32 width = 2; // the requested width for the thumbnail
+  int32 height = 3; // the requested height for the thumbnail
 }
 
 message PhotoServiceThumbnailByHashResponse {
@@ -59,6 +71,7 @@ message PhotoServiceThumbnailByHashResponse {
   string content_type = 2;
 }
 
+// Photo contains basic info of a photo and its metadata
 message Photo {
   // Main
 

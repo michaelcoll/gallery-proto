@@ -12,3 +12,12 @@
 
 # gallery-proto
 The Protobuf/GRPC definition for the gallery app
+
+## Documentation
+- [Daemon endpoints](doc/daemon.md)
+- [Photo endpoints](doc/photo.md)
+
+## Re-generate the doc and contracts
+```
+make
+```
