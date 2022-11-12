@@ -13,21 +13,21 @@ service DaemonService {
 message RegisterRequest {
   string daemon_version = 1; // The version of the daemon
   string daemon_host = 2; // The host (IP, hostname) to use to contact the daemon
-  int32 daemon_port = 3; // The port to use to contact the daemon
+  uint32 daemon_port = 3; // The port to use to contact the daemon
   string daemon_name = 4; // The name of the daemon
   string daemon_owner = 5; // the email of the owner
 }
 
 message RegisterResponse {
   string uuid = 1; // The id used to identify the daemon
-  int32 exp_in = 2; // The duration in seconds that the daemon id is valid
+  uint32 exp_in = 2; // The duration in seconds that the daemon id is valid
 }
 
 message HeartBeatRequest {
   string uuid = 1; // The id used to identify the daemon
   string daemon_version = 2; // The version of the daemon
   string daemon_host = 3; // The host (IP, hostname) to use to contact the daemon
-  int32 daemon_port = 4; // The port to use to contact the daemon
+  uint32 daemon_port = 4; // The port to use to contact the daemon
   string daemon_name = 5; // The name of the daemon
   string daemon_owner = 6; // the email of the owner
 }

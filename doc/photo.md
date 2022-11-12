@@ -113,8 +113,8 @@ indicate which results to include in the response.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page | [int32](#int32) |  | the page number |
-| page_size | [int32](#int32) |  | the page size |
+| page | [uint32](#uint32) |  | the page number |
+| page_size | [uint32](#uint32) |  | the page size |
 
 
 
@@ -149,10 +149,10 @@ Main
 | hash | [string](#string) |  | the photo hash |
 | path | [string](#string) |  | the photo path on the daemon fs |
 | date_time | [string](#string) |  | the date |
-| iso | [int32](#int32) |  | the ISO of the image |
+| iso | [uint32](#uint32) |  | the ISO of the image |
 | exposure_time | [string](#string) |  | the exposure as a fraction |
-| x_dimension | [int32](#int32) |  | the x dimension of the image |
-| y_dimension | [int32](#int32) |  | the y dimension of the image |
+| x_dimension | [uint32](#uint32) |  | the x dimension of the image |
+| y_dimension | [uint32](#uint32) |  | the y dimension of the image |
 | model | [string](#string) |  | the model of the camera that took the image |
 | f_number | [string](#string) |  | the f Number |
 
@@ -202,8 +202,8 @@ ThumbnailByHashRequest represent a search query with a photo hash, a width or an
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hash | [string](#string) |  | a photo hash |
-| width | [int32](#int32) |  | the requested width for the thumbnail |
-| height | [int32](#int32) |  | the requested height for the thumbnail |
+| width | [uint32](#uint32) |  | the requested width for the thumbnail |
+| height | [uint32](#uint32) |  | the requested height for the thumbnail |
 
 
 

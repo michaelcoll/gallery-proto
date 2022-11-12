@@ -23,8 +23,8 @@ service PhotoService {
 // GetPhotosRequest represent a search query with pagination options to
 // indicate which results to include in the response.
 message GetPhotosRequest {
-  int32 page = 1; // the page number
-  int32 page_size = 2; // the page size
+  uint32 page = 1; // the page number
+  uint32 page_size = 2; // the page size
 }
 
 message GetPhotosResponse {
@@ -62,8 +62,8 @@ message PhotoServiceContentByHashResponse {
 // ThumbnailByHashRequest represent a search query with a photo hash, a width or an height.
 message ThumbnailByHashRequest {
   string hash = 1; // a photo hash
-  int32 width = 2; // the requested width for the thumbnail
-  int32 height = 3; // the requested height for the thumbnail
+  uint32 width = 2; // the requested width for the thumbnail
+  uint32 height = 3; // the requested height for the thumbnail
 }
 
 message PhotoServiceThumbnailByHashResponse {
@@ -81,10 +81,10 @@ message Photo {
   // Exif
 
   string date_time = 3; // the date
-  int32 iso = 4; // the ISO of the image
+  uint32 iso = 4; // the ISO of the image
   string exposure_time = 5; // the exposure as a fraction
-  int32 x_dimension = 6; // the x dimension of the image
-  int32 y_dimension = 7; // the y dimension of the image
+  uint32 x_dimension = 6; // the x dimension of the image
+  uint32 y_dimension = 7; // the y dimension of the image
   string model = 8; // the model of the camera that took the image
   string f_number = 9; // the f Number
 }
