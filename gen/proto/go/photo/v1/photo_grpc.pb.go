@@ -31,6 +31,9 @@ type PhotoServiceClient interface {
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(ctx context.Context, in *ContentByHashRequest, opts ...grpc.CallOption) (PhotoService_ContentByHashClient, error)
 	// ThumbnailByHash returns the photo thumbnail by its hash
+	// A width or a height can be provided, if so the thumbnail will have one of the property.
+	// If neither the width nor the height is specified, a width of 200 will be used.
+	// If a width and a height is specified, only the width will be used.
 	ThumbnailByHash(ctx context.Context, in *ThumbnailByHashRequest, opts ...grpc.CallOption) (PhotoService_ThumbnailByHashClient, error)
 }
 
@@ -146,6 +149,9 @@ type PhotoServiceServer interface {
 	// ContentByHash returns the photo content by its hash
 	ContentByHash(*ContentByHashRequest, PhotoService_ContentByHashServer) error
 	// ThumbnailByHash returns the photo thumbnail by its hash
+	// A width or a height can be provided, if so the thumbnail will have one of the property.
+	// If neither the width nor the height is specified, a width of 200 will be used.
+	// If a width and a height is specified, only the width will be used.
 	ThumbnailByHash(*ThumbnailByHashRequest, PhotoService_ThumbnailByHashServer) error
 }
 
