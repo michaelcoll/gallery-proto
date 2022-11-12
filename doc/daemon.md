@@ -33,7 +33,7 @@
 | uuid | [string](#string) |  | The id used to identify the daemon |
 | daemon_version | [string](#string) |  | The version of the daemon |
 | daemon_host | [string](#string) |  | The host (IP, hostname) to use to contact the daemon |
-| daemon_port | [int32](#int32) |  | The port to use to contact the daemon |
+| daemon_port | [uint32](#uint32) |  | The port to use to contact the daemon |
 | daemon_name | [string](#string) |  | The name of the daemon |
 | daemon_owner | [string](#string) |  | the email of the owner |
 
@@ -62,7 +62,7 @@
 | ----- | ---- | ----- | ----------- |
 | daemon_version | [string](#string) |  | The version of the daemon |
 | daemon_host | [string](#string) |  | The host (IP, hostname) to use to contact the daemon |
-| daemon_port | [int32](#int32) |  | The port to use to contact the daemon |
+| daemon_port | [uint32](#uint32) |  | The port to use to contact the daemon |
 | daemon_name | [string](#string) |  | The name of the daemon |
 | daemon_owner | [string](#string) |  | the email of the owner |
 
@@ -80,7 +80,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | uuid | [string](#string) |  | The id used to identify the daemon |
-| exp_in | [int32](#int32) |  | The duration in seconds that the daemon id is valid |
+| exp_in | [uint32](#uint32) |  | The duration in seconds that the daemon id is valid |
 
 
 
