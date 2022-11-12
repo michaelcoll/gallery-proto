@@ -25,6 +25,11 @@ message RegisterResponse {
 
 message HeartBeatRequest {
   string uuid = 1; // The id used to identify the daemon
+  string daemon_version = 2; // The version of the daemon
+  string daemon_host = 3; // The host (IP, hostname) to use to contact the daemon
+  int32 daemon_port = 4; // The port to use to contact the daemon
+  string daemon_name = 5; // The name of the daemon
+  string daemon_owner = 6; // the email of the owner
 }
 
 message HeartBeatResponse {}
