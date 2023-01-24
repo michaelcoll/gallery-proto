@@ -130,6 +130,7 @@ indicate which results to include in the response.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | photos | [Photo](#photo-v1-Photo) | repeated | the photos |
+| total | [uint32](#uint32) |  | the total number of photos |
 
 
 

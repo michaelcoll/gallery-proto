@@ -29,6 +29,7 @@ message GetPhotosRequest {
 
 message GetPhotosResponse {
   repeated Photo photos = 1; // the photos
+  uint32 total = 2; // the total number of photos
 }
 
 // GetByHashRequest represent a search query with a photo hash
