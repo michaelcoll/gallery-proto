@@ -23,8 +23,8 @@ service PhotoService {
 // GetPhotosRequest represent a search query with pagination options to
 // indicate which results to include in the response.
 message GetPhotosRequest {
-  uint32 page = 1; // the page number
-  uint32 page_size = 2; // the page size
+  uint32 limit = 1; // the number of element to retrieve
+  uint32 offset = 2; // the position of the first element to retrieve
 }
 
 message GetPhotosResponse {

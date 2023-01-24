@@ -113,8 +113,8 @@ indicate which results to include in the response.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page | [uint32](#uint32) |  | the page number |
-| page_size | [uint32](#uint32) |  | the page size |
+| limit | [uint32](#uint32) |  | the number of element to retrieve |
+| offset | [uint32](#uint32) |  | the position of the first element to retrieve |
 
 
 
