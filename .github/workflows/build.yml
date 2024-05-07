@@ -38,7 +38,9 @@ jobs:
           repo-token: ${{ github.token }}
 
       - name: Build
-        run: make
+        run: |
+          make prepare
+          make
 
       - name: Detect Changed files
         uses: tj-actions/changed-files@v44
