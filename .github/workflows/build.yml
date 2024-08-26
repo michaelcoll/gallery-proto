@@ -48,7 +48,7 @@ jobs:
           make
 
       - name: Detect Changed files
-        uses: tj-actions/changed-files@v44
+        uses: tj-actions/changed-files@v45
         id: verify-changed-files
         with:
           files: |
