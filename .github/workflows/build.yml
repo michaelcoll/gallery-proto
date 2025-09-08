@@ -57,7 +57,7 @@ jobs:
 
       - name: Verify Changed files
         if: steps.verify-changed-files.outputs.files_changed == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             core.setFailed('Go stubs or doc need to be refreshed !')
